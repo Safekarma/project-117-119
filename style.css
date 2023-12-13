@@ -1,0 +1,43 @@
+body
+{
+    background-color:lightblue;
+}
+
+#score
+{
+    font-size:35px;
+    margin-left:20px;
+    float:left;
+}
+
+#time
+{
+    font-size: 35px;
+    float:right;
+    margin-right:20px;
+}
+
+#show_sketch
+{
+    float:right;
+}
+
+h1
+{
+    color:darkred;
+    background-color:darksalmon;
+    text-align: center;
+    
+}
+
+p,span
+{
+    padding-top:10px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:25px;
+}
+
+#sketch_name
+{
+    color:crimson;
+}
