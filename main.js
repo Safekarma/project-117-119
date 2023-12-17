@@ -12,3 +12,50 @@ timer_check= "";
 drawn_sketch="";
 answer_holder= "";
 score=0;
+
+
+function draw()
+{
+
+}
+
+ function check_sketch()
+ {
+
+ }
+
+ function updateCanvas()
+{
+    background_color="white";
+    random_no = Math.floor((Math.random()*quick_draw_data_set.length)+1);
+}
+
+function setup()
+{
+    canvas=createCanvas(280, 280);
+    canvas.center();
+    background("white");
+}
+
+function draw()
+{
+    if(drawn_sketch == sketch)
+    {
+        answer_holder= "set";
+        score="+1";
+        
+
+    }
+}
+
+function check_sketch()
+{
+    timer_counter= "+1";
+
+    console.log(timer_counter);
+if(timer_counter == 400 );
+    timer_counter=0;
+if(answer_holder== "set");
+answer_holder="";
+updateCanvas();
+}
