@@ -13,21 +13,20 @@ drawn_sketch="";
 answer_holder= "";
 score=0;
 
-
-function draw()
+ function updateCanvas()
 {
+    background("white");
+    random_no = Math.floor((Math.random()*quick_draw_data_set.length)+1);
+    console.log(quick_draw_data_set[random_no]);
+    sketch=quick_draw_data_set[random_no];
+
+document.getElementById("sketch_name").innerHTML='Sketch To be Drawn'+ sketch;
 
 }
 
- function check_sketch()
- {
-
- }
-
- function updateCanvas()
+function preload()
 {
-    background_color="white";
-    random_no = Math.floor((Math.random()*quick_draw_data_set.length)+1);
+    classifier = ml5.imageClassifier('DoodleNet');
 }
 
 function setup()
@@ -35,27 +34,63 @@ function setup()
     canvas=createCanvas(280, 280);
     canvas.center();
     background("white");
+    canvas.mouseReleased(classifyCanvas);
 }
 
 function draw()
 {
+    strokeWeight(13);
+    stroke(0);
+    if (mouseIsPressed)
+    {
+        line(pmouseX, pmouseY, mouseX, mouseY);
+    }
     if(drawn_sketch == sketch)
     {
         answer_holder= "set";
-        score="+1";
-        
-
+        score++;
+        document.getElementById('score').innerHTML = 'Score:' + score;
     }
+
+
 }
 
 function check_sketch()
 {
-    timer_counter= "+1";
-
-    console.log(timer_counter);
-if(timer_counter == 400 );
+    timer_counter++;
+    document.getElementById('time').innerHTML = 'Timer:' + timer_counter;
+console.log(timer_counter)
+   
+if(timer_counter > 400 )
+{
     timer_counter=0;
-if(answer_holder== "set");
+    timer_check="completed"
+}
+if( timer_check == "completed" ||  answer_holder == "set")
+{
 answer_holder="";
+timer_check= "";
 updateCanvas();
+}
+}
+
+
+
+function classifyCanvas()
+{
+    classifier.classify(canvas, gotResults);
+}
+
+function gotResults(error, results)
+{
+    if (error)
+    {
+        console.error(error);
+    }
+    console.log(results);
+    drawn_sketch= results[0].label;
+
+    document.getElementById('sketch').innerHTML = 'sketch:'  + drawn_sketch;
+
+    document.getElementById('confidence').innerHTML = 'confidence:' +Math.round(results[0].confidence * 100) + '%';
 }
